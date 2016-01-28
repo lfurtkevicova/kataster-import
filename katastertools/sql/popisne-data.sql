@@ -316,6 +316,7 @@ BEGIN;
 		pvz integer,
 		kpv smallint,
 		ico bigint,
+           pcz integer,
 		sta integer,
 		rci bigint,
 		stb integer,
