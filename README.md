@@ -48,10 +48,23 @@ $ kt-sql <hlavny-adresar>
 Data ziskane konverziou je mozne importovat do PostGIS z SQL suborov.
 
 ```
-$ createdb kataster -T template_postgis
+$ psql -U <db-user> postgres
+$ create database kataster;
+$ create extension postgis;
+$ create extension postgis_topology;
+$ insert into public.spatial_ref_sys (srid, auth_name, auth_srid, proj4text, srtext) VALUES ( 5514, 'EPSG', 5514, '+proj=krovak +lat_0=49.5 +lon_0=24.83333333333333 +alpha=30.28813972222222 +k=0.9999 +x_0=0 +y_0=0 +ellps=bessel +towgs84=589,76,480,0,0,0,0 +units=m +no_defs ', 'PROJCS["S-JTSK / Krovak East North",GEOGCS["S-JTSK",DATUM["System_Jednotne_Trigonometricke_Site_Katastralni",SPHEROID["Bessel 1841",6377397.155,299.1528128,AUTHORITY["EPSG","7004"]],TOWGS84[589,76,480,0,0,0,0],AUTHORITY["EPSG","6156"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4156"]],PROJECTION["Krovak"],PARAMETER["latitude_of_center",49.5],PARAMETER["longitude_of_center",24.83333333333333],PARAMETER["azimuth",30.28813972222222],PARAMETER["pseudo_standard_parallel_1",78.5],PARAMETER["scale_factor",0.9999],PARAMETER["false_easting",0],PARAMETER["false_northing",0],UNIT["metre",1,AUTHORITY["EPSG","9001"]],AXIS["X",EAST],AXIS["Y",NORTH],AUTHORITY["EPSG","5514"]]');
+
+$ psql kataster;
 $ kt-vytvor_db | psql kataster
 $ PGOPTIONS="-c search_path=kataster,public" psql kataster -f <hlavny-adresar>/sql/popisne_udaje.sql
 $ PGOPTIONS="-c search_path=kataster,public" psql kataster -f <hlavny-adresar>/sql/graficke_udaje.sql
+```
+ukoncenie:
+
+```
+psql -U ludka kataster
+drop scema kataster cascade;
+\q
 ```
 
 ## Testovanie importu
@@ -240,3 +253,48 @@ cislo s nizsim poctom cifier je zlava doplnene nulami
 # Popisne udaje
 Zdrojom popisnych udajov su subory FPU alebo DBF. Obsahuju popisne informacie
 viazuce sa na objekty Katastra.
+
+-------------------------------------------------------------------------------
+
+##Zoznam ciselnikov
+
+###Ciselniky KN
+ * CDE - Casti listu vlastnictva 
+ * DNP - Druh nebytoveho priestoru 
+ * DON - Druh ochrany nehnutelnosti 
+ * DRP - Druh pozemku 
+ * DRF - Druh poznamky
+ * DRV - Druh pravneho vztahu 
+ * BNP - Druh priestoru 
+ * DRS - Druh stavby 
+ * PRP - Prislusnost pozemku 
+ * SNP - Spolocna nehnutelnosti 
+ * TUC - Typ ucastnika 
+ * TVL - Typ vlastnika 
+ * UMP - Umiestnenie pozemku 
+ * UMS - Umiestnenie stavby 
+ * PKK - Sposob vyuzivania pozemku 
+
+###Register katastralnych uzemi
+ * CKU - Cislo katastralneho uzemia 
+ * NKU - Nazov katastralneho uzemia 
+ * COB - Cislo obce
+
+###Register obci
+ * COB - Cislo obce 
+ * NOB - Nazov obce 
+ * COK - Cislo okresu 
+
+###Register okresov
+ * COK - Cislo okresu 
+ * NOK - Nazov okresu 
+ * CKR - Cislo kraja 
+
+###Register krajov
+* CKR - Cislo kraja 
+* NKR - Nazov kraja 
+
+-------------------------
+
+
+
