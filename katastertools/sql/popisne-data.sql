@@ -161,6 +161,8 @@ BEGIN;
 		pvz integer,
 		pep smallint,
 		ppl smallint,
+           slv character varying(20),
+           dst smallint,
 		crc integer,
 		naz_suboru character varying(20)
 	);
