@@ -43,7 +43,7 @@ zoznam_stlpcov = dbf.get_fields(dbf_subor_full_path)[:-1]
 
 
 numdata = {
-		'vl':['clv', 'pcs', 'cit', 'men', 'pvz', 'kpv', 'ico', 'sta', 'rci', 'stb', 'tvl', 'tuc', 'dru', 'tid', 'crc'],
+		'vl':['clv', 'pcs', 'cit', 'men', 'pvz', 'kpv', 'ico', 'pcz','sta', 'rci', 'stb', 'tvl', 'tuc', 'dru', 'tid', 'crc'],
 		'bp': ['icp', 'clv', 'pcs', 'bnp', 'cip', 'cib', 'vym', 'pec', 'mss', 'cit', 'men', 'pvz', 'kpv', 'cen', 'oce', 'crc'],
 		'cs': ['ics', 'clv', 'cel', 'cpa', 'pec', 'mss', 'vym', 'ums', 'drs', 'pvz', 'kpv', 'don', 'cen', 'oce', 'zcs', 'crc'],
 		'ep': ['cpa', 'cpu', 'vym', 'kvv', 'drp', 'don', 'pkk', 'mss', 'pec', 'cel', 'clv', 'kpv', 'ump', 'pvz', 'miv', 'clm',
@@ -54,7 +54,7 @@ numdata = {
 		'pk': ['ump', 'cpk', 'cpu', 'crc'],
 		'pv': ['idc', 'clv', 'pcs', 'idt', 'idn', 'cde', 'drf', 'pvz', 'kpv', 'crc'],
 		'uz': ['cel', 'sip', 'sek', 'pks', 'pvz', 'rzp', 'kpv', 'ppe', 'ico', 'crc'],
-		'vl': ['clv', 'pcs', 'cit', 'men', 'pvz', 'kpv', 'ico', 'sta', 'rci', 'stb', 'tvl', 'tuc', 'dru', 'tid', 'crc'],
+		'vl': ['clv', 'pcs', 'cit', 'men', 'pvz', 'kpv', 'ico', 'pcz', 'sta', 'rci', 'stb', 'tvl', 'tuc', 'dru', 'tid', 'crc'],
 		'nj': ['cel', 'ico', 'pvz', 'sek', 'sip', 'tid', 'crc']
 }
 nullchar = re.compile('\00') # invalid null character (can be also replace by sed $ sed -i 's/\x0//g')
