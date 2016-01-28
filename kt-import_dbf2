@@ -48,7 +48,7 @@ numdata = {
 		'cs': ['ics', 'clv', 'cel', 'cpa', 'pec', 'mss', 'vym', 'ums', 'drs', 'pvz', 'kpv', 'don', 'cen', 'oce', 'zcs', 'crc'],
 		'ep': ['cpa', 'cpu', 'vym', 'kvv', 'drp', 'don', 'pkk', 'mss', 'pec', 'cel', 'clv', 'kpv', 'ump', 'pvz', 'miv', 'clm',
 				'drv', 'ndp', 'prp', 'spn', 'mlm', 'cen', 'oce', 'pcp', 'crc'],
-		'lv': ['clv', 'psv', 'rzs', 'kpv', 'rzp', 'pvz', 'pep', 'ppl', 'crc'],
+		'lv': ['clv', 'psv', 'rzs', 'kpv', 'rzp', 'pvz', 'pep', 'ppl', 'dst','crc'],
 		'pa': ['cpa', 'vym', 'kvv', 'drp', 'don', 'pkk', 'mss', 'pec', 'cel', 'clv', 'kpv', 'ump', 'pvz', 'miv', 'clm', 'drv',
 				'prp', 'spn', 'ndp', 'dn1', 'dn2', 'dn3', 'dn4', 'dn5', 'dn6', 'dn7', 'dn8', 'mlm', 'cen', 'oce', 'crc'],
 		'pk': ['ump', 'cpk', 'cpu', 'crc'],
