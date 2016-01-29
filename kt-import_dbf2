@@ -93,8 +93,6 @@ if typ_dbf in ('cs', 'pa'):
 if typ_dbf == 'ep':
 	print "UPDATE kn_%s SET parckey = (ku::text || to_char(cpu, 'FM00') || to_char(cpa, 'FM000000000')) WHERE ku = '%s';" % (typ_dbf, ku)
 
-
 print 'END;'
-
 
 # vim: set ts=4 sts=4 sw=4 noet:
