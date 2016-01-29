@@ -23,7 +23,7 @@ BEGIN;
 		oce integer,
 		cas character varying(30),
 		crc integer,
-		naz_suboru character varying(20)
+		subor character varying(32)
 	);
 	COMMENT ON TABLE kn_bp IS 'Kataster: zoznam vlastnickych podielov k bytom';
 
@@ -72,7 +72,7 @@ BEGIN;
 		cas character varying(30),
 		zcs integer,
 		crc integer,
-		naz_suboru character varying(20) 
+		subor character varying(32)
 	);
 	COMMENT ON TABLE kn_cs IS 'Kataster: zoznam stavieb na cudzich pozemkoch';
 	
@@ -123,7 +123,7 @@ BEGIN;
 		pcp integer,
 		cas character varying(30),
 		crc integer,
-		naz_suboru character varying(20)
+		subor character varying(32)
 	);
 	COMMENT ON TABLE kn_ep IS 'Kataster: informacie o zdruzenych parcelach';
 
@@ -164,7 +164,7 @@ BEGIN;
            slv character varying(20),
            dst smallint,
 		crc integer,
-		naz_suboru character varying(20)
+		subor character varying(32)
 	);
 	COMMENT ON TABLE kn_lv IS 'Kataster: listy vlastnictva';
 
@@ -212,7 +212,7 @@ BEGIN;
 		oce integer,
 		cas character varying(30),
 		crc integer,
-		naz_suboru character varying(20)
+		subor character varying(32)
 	);
 	COMMENT ON TABLE kn_pa IS 'Kataster: informacie o parcelach';
 
@@ -247,7 +247,7 @@ BEGIN;
 		npk character varying(28),
 		cpu integer,
 		crc integer,
-		naz_suboru character varying(20)
+		subor character varying(32)
 	);
 	COMMENT ON TABLE kn_pk IS 'Kataster: Povodne k.u.';
 
@@ -268,7 +268,7 @@ BEGIN;
 		kpv smallint,
 		idu character varying(255),
 		crc integer,
-		naz_suboru character varying(20)
+		subor character varying(32)
 	);
 	COMMENT ON TABLE kn_pv IS 'Kataster: pravne vztahy';
 
@@ -296,7 +296,7 @@ BEGIN;
 		tid character varying(255),
 		naj character varying(255),
 		crc integer,
-		naz_suboru character varying(20)
+		subor character varying(32)
 	);
 	COMMENT ON TABLE kn_uz IS 'Kataster: ';
 
@@ -342,7 +342,7 @@ BEGIN;
 		stt character varying(30),
 		tid integer,
 		crc integer,
-		naz_suboru character varying(20)
+		subor character varying(32)
 	);
 	COMMENT ON TABLE kn_vl IS 'Kataster: zoznam vlastnikov';
 
@@ -374,7 +374,7 @@ BEGIN;
 		sip integer,
 		tid integer,
 		crc integer,
-		naz_suboru character varying(20)
+		subor character varying(32)
 	);
 	COMMENT ON TABLE kn_nj IS 'Kataster: drzitel, najomca a ina opr. osoba';
 	
@@ -387,6 +387,5 @@ BEGIN;
 	CREATE INDEX idx_kn_nj_ico
 		ON kn_nj (ico);
 END;
-
 
 -- vim: set ts=2 sts=2 sw=2 noet:
