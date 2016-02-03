@@ -54,7 +54,6 @@ numdata = {
 		'pk': ['ump', 'cpk', 'cpu', 'crc'],
 		'pv': ['idc', 'clv', 'pcs', 'idt', 'idn', 'cde', 'drf', 'pvz', 'kpv', 'crc'],
 		'uz': ['cel', 'sip', 'sek', 'pks', 'pvz', 'rzp', 'kpv', 'ppe', 'ico', 'crc'],
-		'vl': ['clv', 'pcs', 'cit', 'men', 'pvz', 'kpv', 'ico', 'pcz', 'sta', 'rci', 'stb', 'tvl', 'tuc', 'dru', 'tid', 'crc'],
 		'nj': ['cel', 'ico', 'pvz', 'sek', 'sip', 'tid', 'crc']
 }
 nullchar = re.compile('\00') # invalid null character (can be also replace by sed $ sed -i 's/\x0//g')
