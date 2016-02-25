@@ -26,7 +26,10 @@ test ! -d "$ROOT_DIR/vgi" && { echo "ERROR: Adresar '$ROOT_DIR/vgi' neexistuje. 
 test ! -d "$ROOT_DIR/fpu" && test ! -d "$ROOT_DIR/dbf" && { echo "ERROR: Adresar '$ROOT_DIR/fpu' ani '$ROOT_DIR/dbf' neexistuje. Koncim."; echo; exit 1; }
 
 echo "PROGRESS:5"
+sleep 1
 echo "* Cistenie vystupnych adresarov ..."
+echo "PROGRESS:10"
+sleep 3
 echo;
 
 # vycistenie adresarov sql
@@ -46,7 +49,8 @@ if [[ -d fpu && "$(ls -A fpu)" ]]; then
 	#
 	### FPU ###
 	#
-	echo "PROGRESS:10"
+	echo "PROGRESS:15"
+      sleep 1
 	echo "* Konverzia FPU do SQL ..."
 	for file in $(find "$ROOT_DIR/fpu" -iname "*.FPU"); do
 		fpuc=$(sed 's/\.FPU$/\.fpuc/I' <<< $file)
@@ -63,7 +67,8 @@ else
 	#
 	### DBF ###
 	#
-    echo "PROGRESS:15"
+     echo "PROGRESS:15"
+     sleep 1
 	echo "* Konverzia DBF do SQL ..."
 	for file in $(find "$ROOT_DIR/dbf" -iname "*.DBF"); do
 		
@@ -73,6 +78,7 @@ else
 fi
 
 echo "PROGRESS:20"
+sleep 1
 echo "* Spajanie SQL suborov popisnych dat ..."
 find $ROOT_DIR/sql_p -type f -iname *.sql -exec cat "{}" >> sql/popisne_udaje.sql \;
 echo;
@@ -83,32 +89,39 @@ echo;
 #
 # KN
 echo "PROGRESS:25"
+sleep 1
 echo "* Konverzia KN do SQL (KATUZ, KLADPAR, LINIE, POPIS, ZAPPAR, ZNACKY, ZUOB) ..."
 find vgi -iname "KN*.vgi" -exec kt-vgi2shp -f sql-copy -t -k -l -p -r -n -z -o sql_g "{}" \; &> log/vgi-kn-sql.log
 
 echo "PROGRESS:30"
+sleep 1
 echo "* Konverzia KN do SHP (vsetky najdene vrstvy)..."
 find vgi -iname "KN*.vgi" -exec kt-vgi2shp -f shp -o shp "{}" \; &> log/vgi-kn-shp.log
 
 echo "PROGRESS:35"
+sleep 1
 echo "* Konverzia KN do DGN (vsetky najdene vrstvy)..."
 find vgi -iname "KN*.vgi" -exec kt-vgi2shp -f dgn -o dgn "{}" \; &> log/vgi-kn-dgn.log
 
 
 # UO
 echo "PROGRESS:40"
+sleep 1
 echo "* Konverzia UO do SQL (UOV)..."
 find vgi -iname "UO*.vgi" -exec kt-vgi2shp -f sql-copy -u -o sql_g "{}" \; &> log/vgi-uo-sql.log
 
 echo "PROGRESS:55"
+sleep 1
 echo "* Konverzia UO do SHP (vsetky najdene vrstvy)..."
 find vgi -iname "UO*.vgi" -exec kt-vgi2shp -f shp -o shp "{}" \; &> log/vgi-uo-shp.log
 
 echo "PROGRESS:65"
+sleep 3
 echo "* Konverzia UO do DGN (vsetky najdene vrstvy)..."
 find vgi -iname "UO*.vgi" -exec kt-vgi2shp -f dgn -o dgn "{}" \; &> log/vgi-uo-dgn.log
 
 echo "PROGRESS:75"
+sleep 3
 echo "* Spajanie SQL suborov grafickych dat ..."
 find $ROOT_DIR/sql_g -type f -iname *.sql -exec cat "{}" >> sql/graficke_udaje.sql \;
 echo;
@@ -116,6 +129,7 @@ echo;
 
 # logy
 echo "PROGRESS:90"
+sleep 1
 echo "* Chybove hlasenia:"
 grep -vH "^INFO\|^$" $ROOT_DIR/log/*.log || true
 echo;
