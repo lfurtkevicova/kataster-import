@@ -22,8 +22,10 @@ echo "PROGRESS:0"
 echo "* Vstupny adresar: $ROOT_DIR"
 echo;
 
-test ! -d "$ROOT_DIR/vgi" && { echo "ERROR: Adresar '$ROOT_DIR/vgi' neexistuje. Koncim."; echo; exit 1; }
-test ! -d "$ROOT_DIR/fpu" && test ! -d "$ROOT_DIR/dbf" && { echo "ERROR: Adresar '$ROOT_DIR/fpu' ani '$ROOT_DIR/dbf' neexistuje. Koncim."; echo; exit 1; }
+vgi=`ls -d $ROOT_DIR/VGI*`
+spi=`ls -d $ROOT_DIR/SPI*`
+test ! -d "$vgi" && { echo "ERROR: Adresar '$ROOT_DIR/vgi' neexistuje. Koncim."; echo; exit 1; }
+test ! -d "$fpu" && test ! -d "$spi" && { echo "ERROR: Adresar '$ROOT_DIR/FPU' ani '$ROOT_DIR/SPI' neexistuje. Koncim."; echo; exit 1; }
 
 echo "PROGRESS:5"
 sleep 1
@@ -70,7 +72,7 @@ else
      echo "PROGRESS:15"
      sleep 1
 	echo "* Konverzia DBF do SQL ..."
-	for file in $(find "$ROOT_DIR/dbf" -iname "*.DBF"); do
+	for file in $(find "$ROOT_DIR/SPI*" -iname "*.DBF"); do
 		
 		echo "* Konverzia DBF do SQL ($file) ..."
 		kt-import_dbf2 $file > $ROOT_DIR/sql_p/$(basename $file).sql
@@ -91,34 +93,34 @@ echo;
 echo "PROGRESS:25"
 sleep 1
 echo "* Konverzia KN do SQL (KATUZ, KLADPAR, LINIE, POPIS, ZAPPAR, ZNACKY, ZUOB) ..."
-find vgi -iname "KN*.vgi" -exec kt-vgi2shp -f sql-copy -t -k -l -p -r -n -z -o sql_g "{}" \; &> log/vgi-kn-sql.log
+find $vgi -iname "KN*.vgi" -exec kt-vgi2shp -f sql-copy -t -k -l -p -r -n -z -o sql_g "{}" \; &> log/vgi-kn-sql.log
 
 echo "PROGRESS:30"
 sleep 1
 echo "* Konverzia KN do SHP (vsetky najdene vrstvy)..."
-find vgi -iname "KN*.vgi" -exec kt-vgi2shp -f shp -o shp "{}" \; &> log/vgi-kn-shp.log
+find $vgi -iname "KN*.vgi" -exec kt-vgi2shp -f shp -o shp "{}" \; &> log/vgi-kn-shp.log
 
 echo "PROGRESS:35"
 sleep 1
 echo "* Konverzia KN do DGN (vsetky najdene vrstvy)..."
-find vgi -iname "KN*.vgi" -exec kt-vgi2shp -f dgn -o dgn "{}" \; &> log/vgi-kn-dgn.log
+find $vgi -iname "KN*.vgi" -exec kt-vgi2shp -f dgn -o dgn "{}" \; &> log/vgi-kn-dgn.log
 
 
 # UO
 echo "PROGRESS:40"
 sleep 1
 echo "* Konverzia UO do SQL (UOV)..."
-find vgi -iname "UO*.vgi" -exec kt-vgi2shp -f sql-copy -u -o sql_g "{}" \; &> log/vgi-uo-sql.log
+find $vgi -iname "UO*.vgi" -exec kt-vgi2shp -f sql-copy -u -o sql_g "{}" \; &> log/vgi-uo-sql.log
 
 echo "PROGRESS:55"
 sleep 1
 echo "* Konverzia UO do SHP (vsetky najdene vrstvy)..."
-find vgi -iname "UO*.vgi" -exec kt-vgi2shp -f shp -o shp "{}" \; &> log/vgi-uo-shp.log
+find $vgi -iname "UO*.vgi" -exec kt-vgi2shp -f shp -o shp "{}" \; &> log/vgi-uo-shp.log
 
 echo "PROGRESS:65"
 sleep 3
 echo "* Konverzia UO do DGN (vsetky najdene vrstvy)..."
-find vgi -iname "UO*.vgi" -exec kt-vgi2shp -f dgn -o dgn "{}" \; &> log/vgi-uo-dgn.log
+find $vgi -iname "UO*.vgi" -exec kt-vgi2shp -f dgn -o dgn "{}" \; &> log/vgi-uo-dgn.log
 
 echo "PROGRESS:75"
 sleep 3
