@@ -6,8 +6,6 @@
 *.shp
 *.shx
 *.tmp
-*.vgi
-*.VGI
 tmp
 MANIFEST
 dist
