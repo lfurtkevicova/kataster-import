@@ -72,7 +72,7 @@ else
      echo "PROGRESS:15"
      sleep 1
 	echo "* Konverzia DBF do SQL ..."
-	for file in $(find "$ROOT_DIR/SPI*" -iname "*.DBF"); do
+	for file in $(find "$spi" -iname "*.DBF"); do
 		
 		echo "* Konverzia DBF do SQL ($file) ..."
 		kt-import_dbf2 $file > $ROOT_DIR/sql_p/$(basename $file).sql
