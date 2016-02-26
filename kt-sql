@@ -25,8 +25,8 @@ echo;
 cd "$ROOT_DIR"
 if [ `ls VGI*.zip` ]; then
 echo "PROGRESS:3"
-sleep 3
 echo "Rozbalovanie suborov vo formate ZIP ..."
+sleep 5
 find -name '*.zip' -exec sh -c 'unzip -o -d "${1%.*}" "$1"' _ {} \;
 fi  
  
@@ -50,28 +50,29 @@ for adr in "${vystupne_adresare[@]}"; do
 	mkdir -p $ROOT_DIR/$adr
 done
 
-cd $spi
+cd "$ROOT_DIR"
 
-# ak existuje subor 'fpt' v adresari 'spi', pouzijeme ho na konverziu, inac pouzijeme adresar 'dbf'
-if [ `ls *.fpt` ]; then
+# cd "$spi"
+## ak existuje subor 'fpt' v adresari 'spi', pouzijeme ho na konverziu, inac pouzijeme adresar 'dbf'
+#if [ `ls *.fpt` ]; then
 
-	#
-	### FPU ###
-	#
-	echo "PROGRESS:15"
-      sleep 1
-	echo "* Konverzia FPU do SQL ..."
-	for file in $(find "$spi" -iname "*.fpt"); do
-		fpuc=$(sed 's/\.fpt$/\.fpuc/I' <<< $file)
+	##
+	#### FPU ###
+	##
+	#echo "PROGRESS:15"
+      #sleep 1
+	#echo "* Konverzia FPU do SQL ..."
+	#for file in $(find "$spi" -iname "*.fpt"); do
+		#fpuc=$(sed 's/\.fpt$/\.fpuc/I' <<< $file)
 		
-		echo "* Cistenie FPU ($file) ..."
-		kt-vycisti_fuvi $file IBM852 > $fpuc || (echo "I: Opakujem cistenie s kodovanim 'CP1250'"; kt-vycisti_fuvi $file CP1250 > $fpuc)
+		#echo "* Cistenie FPU ($file) ..."
+		#kt-vycisti_fuvi $file IBM852 > $fpuc || (echo "I: Opakujem cistenie s kodovanim 'CP1250'"; kt-vycisti_fuvi $file CP1250 > $fpuc)
 	    
-		echo "* Konverzia FPU do SQL ($file) ..."
-		kt-import_fuvi $fpuc > $ROOT_DIR/sql_p/$(basename $file).sql
-	done;
+		#echo "* Konverzia FPU do SQL ($file) ..."
+		#kt-import_fuvi $fpuc > $ROOT_DIR/sql_p/$(basename $file).sql
+	#done;
 
-else
+#else
 
 	#
 	### DBF ###
@@ -84,9 +85,7 @@ else
 		echo "* Konverzia DBF do SQL ($file) ..."
 		kt-import_dbf2 $file > $ROOT_DIR/sql_p/$(basename $file).sql
 	done;
-fi
-
-cd ..
+#fi
 
 echo "PROGRESS:20"
 sleep 1
