@@ -54,7 +54,7 @@ if [[ -d fpu && "$(ls -A fpu)" ]]; then
 	echo "PROGRESS:15"
       sleep 1
 	echo "* Konverzia FPU do SQL ..."
-	for file in $(find "$ROOT_DIR/fpu" -iname "*.FPU"); do
+	for file in $(find "$spi" -iname "*.FPU"); do
 		fpuc=$(sed 's/\.FPU$/\.fpuc/I' <<< $file)
 		
 		echo "* Cistenie FPU ($file) ..."
