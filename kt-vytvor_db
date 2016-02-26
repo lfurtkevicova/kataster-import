@@ -17,9 +17,11 @@ sql_subory = [
 	'graficke-data.sql',
 ]
 
-# vytvorenie schem
-print 'CREATE SCHEMA kataster;'
-print 'SET search_path TO kataster,public;'
+# potrebne vymysliet tak, aby sa schema volala podla niecoho .. pripadne, aby bol nazov zadavany interaktivne
+schemaname = 'kataster'
+
+print 'CREATE SCHEMA %s;' % (schemaname) 
+print 'SET search_path TO %s,public;' % (schemaname)
 
 # vytvorenie tabuliek
 for sql_subor in sql_subory:
