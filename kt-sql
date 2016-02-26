@@ -22,10 +22,18 @@ echo "PROGRESS:0"
 echo "* Vstupny adresar: $ROOT_DIR"
 echo;
 
-vgi=`ls -d $ROOT_DIR/VGI*`
-spi=`ls -d $ROOT_DIR/SPI*`
+cd "$ROOT_DIR"
+if [ `ls VGI*.zip` ]; then
+echo "PROGRESS:3"
+sleep 3
+echo "Rozbalovanie suborov vo formate ZIP ..."
+find -name '*.zip' -exec sh -c 'unzip -o -d "${1%.*}" "$1"' _ {} \;
+fi  
+ 
+vgi=`ls -d VGI* | grep -v '.zip'`
+spi=`ls -d SPI* | grep -v '.zip'`
 test ! -d "$vgi" && { echo "ERROR: Adresar '$ROOT_DIR/vgi' neexistuje. Koncim."; echo; exit 1; }
-test ! -d "$fpu" && test ! -d "$spi" && { echo "ERROR: Adresar '$ROOT_DIR/FPU' ani '$ROOT_DIR/SPI' neexistuje. Koncim."; echo; exit 1; }
+test ! -d "$spi" && { echo "ERROR: Adresar '$ROOT_DIR/SPI' neexistuje. Koncim."; echo; exit 1; }
 
 echo "PROGRESS:5"
 sleep 1
@@ -42,11 +50,10 @@ for adr in "${vystupne_adresare[@]}"; do
 	mkdir -p $ROOT_DIR/$adr
 done
 
+cd $spi
 
-cd "$ROOT_DIR"
-
-# ak existuje adresar 'fpu', pouzijeme ho na konverziu, inac pouzijeme adresar 'dbf'
-if [[ -d fpu && "$(ls -A fpu)" ]]; then
+# ak existuje subor 'fpt' v adresari 'spi', pouzijeme ho na konverziu, inac pouzijeme adresar 'dbf'
+if [ `ls *.fpt` ]; then
 
 	#
 	### FPU ###
@@ -54,8 +61,8 @@ if [[ -d fpu && "$(ls -A fpu)" ]]; then
 	echo "PROGRESS:15"
       sleep 1
 	echo "* Konverzia FPU do SQL ..."
-	for file in $(find "$spi" -iname "*.FPU"); do
-		fpuc=$(sed 's/\.FPU$/\.fpuc/I' <<< $file)
+	for file in $(find "$spi" -iname "*.fpt"); do
+		fpuc=$(sed 's/\.fpt$/\.fpuc/I' <<< $file)
 		
 		echo "* Cistenie FPU ($file) ..."
 		kt-vycisti_fuvi $file IBM852 > $fpuc || (echo "I: Opakujem cistenie s kodovanim 'CP1250'"; kt-vycisti_fuvi $file CP1250 > $fpuc)
@@ -78,6 +85,8 @@ else
 		kt-import_dbf2 $file > $ROOT_DIR/sql_p/$(basename $file).sql
 	done;
 fi
+
+cd ..
 
 echo "PROGRESS:20"
 sleep 1
